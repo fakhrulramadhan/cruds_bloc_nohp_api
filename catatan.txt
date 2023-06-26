@@ -1,0 +1,13 @@
+alt +t = utk run modul baru dari config.json
+ganti module_directory_name menjadi presentation (buat folder presentation)
+ctrl + shift + alt + 3 = flutter pub run build_runner watch --delete-conflicting-outputs
+
+//bloc = controller
+//event = peristiwanya
+
+//bloc provider dan builder ditaruh di folder provider
+//(supaya kode viewnya enggak terlalu banyak)
+
+//buat modelnya dengan hiranta json to dart
+// tekan ctrl+shift+alt_b
+//muncul folder baru .json_models -> models_jsonc buat model disitu

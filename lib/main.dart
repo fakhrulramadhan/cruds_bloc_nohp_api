@@ -1,6 +1,5 @@
 import 'package:hyper_ui/core.dart';
 import 'package:flutter/material.dart';
-import 'package:hyper_ui/debug.dart';
 
 void main() async {
   await initialize();
@@ -21,7 +20,7 @@ class MainApp extends StatelessWidget {
       navigatorKey: Get.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: getDefaultTheme(),
-      home: MainNavigationView(),
+      home: ProductListView(), //
       builder: (context, child) => debugView(
         context: context,
         child: child,
