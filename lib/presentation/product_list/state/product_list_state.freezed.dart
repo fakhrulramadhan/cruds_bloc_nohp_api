@@ -18,6 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProductListState {
   int get counter => throw _privateConstructorUsedError;
   set counter(int value) => throw _privateConstructorUsedError;
+  List<Product> get products => throw _privateConstructorUsedError;
+  set products(List<Product> value) => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
+  set loading(bool value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductListStateCopyWith<ProductListState> get copyWith =>
@@ -30,7 +34,7 @@ abstract class $ProductListStateCopyWith<$Res> {
           ProductListState value, $Res Function(ProductListState) then) =
       _$ProductListStateCopyWithImpl<$Res, ProductListState>;
   @useResult
-  $Res call({int counter});
+  $Res call({int counter, List<Product> products, bool loading});
 }
 
 /// @nodoc
@@ -47,12 +51,22 @@ class _$ProductListStateCopyWithImpl<$Res, $Val extends ProductListState>
   @override
   $Res call({
     Object? counter = null,
+    Object? products = null,
+    Object? loading = null,
   }) {
     return _then(_value.copyWith(
       counter: null == counter
           ? _value.counter
           : counter // ignore: cast_nullable_to_non_nullable
               as int,
+      products: null == products
+          ? _value.products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<Product>,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -65,7 +79,7 @@ abstract class _$$_ProductListStateCopyWith<$Res>
       __$$_ProductListStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int counter});
+  $Res call({int counter, List<Product> products, bool loading});
 }
 
 /// @nodoc
@@ -80,12 +94,22 @@ class __$$_ProductListStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? counter = null,
+    Object? products = null,
+    Object? loading = null,
   }) {
     return _then(_$_ProductListState(
       counter: null == counter
           ? _value.counter
           : counter // ignore: cast_nullable_to_non_nullable
               as int,
+      products: null == products
+          ? _value.products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<Product>,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -93,15 +117,22 @@ class __$$_ProductListStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ProductListState implements _ProductListState {
-  _$_ProductListState({this.counter = 0});
+  _$_ProductListState(
+      {this.counter = 0, this.products = const [], this.loading = false});
 
   @override
   @JsonKey()
   int counter;
+  @override
+  @JsonKey()
+  List<Product> products;
+  @override
+  @JsonKey()
+  bool loading;
 
   @override
   String toString() {
-    return 'ProductListState(counter: $counter)';
+    return 'ProductListState(counter: $counter, products: $products, loading: $loading)';
   }
 
   @JsonKey(ignore: true)
@@ -112,11 +143,20 @@ class _$_ProductListState implements _ProductListState {
 }
 
 abstract class _ProductListState implements ProductListState {
-  factory _ProductListState({int counter}) = _$_ProductListState;
+  factory _ProductListState(
+      {int counter,
+      List<Product> products,
+      bool loading}) = _$_ProductListState;
 
   @override
   int get counter;
   set counter(int value);
+  @override
+  List<Product> get products;
+  set products(List<Product> value);
+  @override
+  bool get loading;
+  set loading(bool value);
   @override
   @JsonKey(ignore: true)
   _$$_ProductListStateCopyWith<_$_ProductListState> get copyWith =>

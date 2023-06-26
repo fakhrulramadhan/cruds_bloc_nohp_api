@@ -34,6 +34,8 @@ mixin _$ProductFormState {
   bool get loading =>
       throw _privateConstructorUsedError; //kalau mau pakai set state loading, event loadingnya dihapus
   set loading(bool value) => throw _privateConstructorUsedError;
+  Product? get item => throw _privateConstructorUsedError;
+  set item(Product? value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductFormStateCopyWith<ProductFormState> get copyWith =>
@@ -51,7 +53,10 @@ abstract class $ProductFormStateCopyWith<$Res> {
       String productName,
       double price,
       String description,
-      bool loading});
+      bool loading,
+      Product? item});
+
+  $ProductCopyWith<$Res>? get item;
 }
 
 /// @nodoc
@@ -72,6 +77,7 @@ class _$ProductFormStateCopyWithImpl<$Res, $Val extends ProductFormState>
     Object? price = null,
     Object? description = null,
     Object? loading = null,
+    Object? item = freezed,
   }) {
     return _then(_value.copyWith(
       photo: null == photo
@@ -94,7 +100,23 @@ class _$ProductFormStateCopyWithImpl<$Res, $Val extends ProductFormState>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      item: freezed == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as Product?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductCopyWith<$Res>? get item {
+    if (_value.item == null) {
+      return null;
+    }
+
+    return $ProductCopyWith<$Res>(_value.item!, (value) {
+      return _then(_value.copyWith(item: value) as $Val);
+    });
   }
 }
 
@@ -111,7 +133,11 @@ abstract class _$$_ProductFormStateCopyWith<$Res>
       String productName,
       double price,
       String description,
-      bool loading});
+      bool loading,
+      Product? item});
+
+  @override
+  $ProductCopyWith<$Res>? get item;
 }
 
 /// @nodoc
@@ -130,6 +156,7 @@ class __$$_ProductFormStateCopyWithImpl<$Res>
     Object? price = null,
     Object? description = null,
     Object? loading = null,
+    Object? item = freezed,
   }) {
     return _then(_$_ProductFormState(
       photo: null == photo
@@ -152,6 +179,10 @@ class __$$_ProductFormStateCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      item: freezed == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as Product?,
     ));
   }
 }
@@ -164,7 +195,8 @@ class _$_ProductFormState implements _ProductFormState {
       this.productName = '',
       this.price = 0,
       this.description = '',
-      this.loading = false});
+      this.loading = false,
+      this.item});
 
 //taruh nilai defaultnya di @default(..)
   @override
@@ -185,10 +217,12 @@ class _$_ProductFormState implements _ProductFormState {
   @override
   @JsonKey()
   bool loading;
+  @override
+  Product? item;
 
   @override
   String toString() {
-    return 'ProductFormState(photo: $photo, productName: $productName, price: $price, description: $description, loading: $loading)';
+    return 'ProductFormState(photo: $photo, productName: $productName, price: $price, description: $description, loading: $loading, item: $item)';
   }
 
   @JsonKey(ignore: true)
@@ -204,7 +238,8 @@ abstract class _ProductFormState implements ProductFormState {
       String productName,
       double price,
       String description,
-      bool loading}) = _$_ProductFormState;
+      bool loading,
+      Product? item}) = _$_ProductFormState;
 
   @override //taruh nilai defaultnya di @default(..)
   String get photo; //taruh nilai defaultnya di @default(..)
@@ -222,6 +257,9 @@ abstract class _ProductFormState implements ProductFormState {
   bool
       get loading; //kalau mau pakai set state loading, event loadingnya dihapus
   set loading(bool value);
+  @override
+  Product? get item;
+  set item(Product? value);
   @override
   @JsonKey(ignore: true)
   _$$_ProductFormStateCopyWith<_$_ProductFormState> get copyWith =>

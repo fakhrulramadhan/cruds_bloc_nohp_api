@@ -35,18 +35,38 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState>
       //update dulu statenya
       //state.loading = true;
 
+      //(isCreateMode)
+
+      ///kalau editmode dan bukan lagi editmode
+      if (isEditMode) {
+        await ProductService().update(
+            id: state.item!.id!, //idnya sudah ada di dalam item
+            item: Product(
+                photo: state.photo,
+                description: state.description,
+                price: state.price,
+                productName: state.productName));
+      } else if (isCreateMode) {
+        await ProductService().add(Product(
+          photo: state.photo, //fotonya ambil dari state.photo
+          productName: state.productName,
+          price: state.price, //price sama state.price harus sama sama double
+          description: state.description,
+        ));
+      }
+
       //di bloc panggil event pakai add(nama_event)
       //mulai loading event
       add(ProductFormLoadingEvent()); //panggil loading Event
 
       //proses post (tambah) data
       //add nya diisi oleh nama model, masukkin selain field id
-      await ProductService().add(Product(
-        photo: state.photo, //fotonya ambil dari state.photo
-        productName: state.productName,
-        price: state.price, //price sama state.price harus sama sama double
-        description: state.description,
-      ));
+      // await ProductService().add(Product(
+      //   photo: state.photo, //fotonya ambil dari state.photo
+      //   productName: state.productName,
+      //   price: state.price, //price sama state.price harus sama sama double
+      //   description: state.description,
+      // ));
 
       //tunggu dulu 2 detik]
       await Future.delayed(Duration(seconds: 2));
@@ -72,6 +92,9 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState>
   void initState() {
     //initState event
     super.initState();
+    final Product? item; //item berisi data products
+    //print(isEditMode);
+    //print(state.item);
   }
 
   @override
@@ -84,5 +107,15 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState>
   Future<void> close() {
     dispose();
     return super.close();
+  }
+
+  //buat fungsi getter ketika mau edit
+  bool get isEditMode {
+    return state.item != null; //item data argumen produknya ada
+  }
+
+  //fungsi ketika modenya mau tambah produk
+  bool get isCreateMode {
+    return state.item == null; //item data argumen produknya tidak ada
   }
 }

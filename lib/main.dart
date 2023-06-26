@@ -1,6 +1,7 @@
 import 'package:hyper_ui/core.dart';
 import 'package:flutter/material.dart';
 
+//kalau mau pakai breakpoint, harus pakai mode debug
 void main() async {
   await initialize();
   runMainApp();

@@ -11,3 +11,6 @@ ctrl + shift + alt + 3 = flutter pub run build_runner watch --delete-conflicting
 //buat modelnya dengan hiranta json to dart
 // tekan ctrl+shift+alt_b
 //muncul folder baru .json_models -> models_jsonc buat model disitu
+
+bikin dulu statenya -> event -> baru blocnya (controller)
+//ctrl+ shift+alt+3

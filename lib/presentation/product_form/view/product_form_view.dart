@@ -2,10 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:hyper_ui/core.dart';
 
 class ProductFormView extends ProductFormConsumerWidget {
-  const ProductFormView({super.key});
+  //argument utk update data
+  //kalau di product list view, nama itemnya itu products
+  final Product? item; //item berisi data products
+
+  ProductFormView({super.key, this.item});
+
+  //fungsi utk menerima arguments
+  @override
+  beforeInitState(bloc, state) {
+    state.item == item;
+    //print(state.item);
+    print(state.item);
+  }
 
   @override
-  void beforeInitState(bloc, state) {}
+  void initState(bloc, state) {
+    //super.initState();
+    //state.item == item;
+    //print(state.item);
+    //print(item);
+  }
+
+  // @override
+  // beforeInitState(ProductFormBloc bloc, ProductFormState state) {
+  //   // TODO: implement beforeInitState
+
+  //   state.item = item;
+  //   print("====");
+  //   print(item);
+  //   return super.beforeInitState(bloc, state);
+  // }
 
   @override
   Widget buildView(context, bloc, state) {
@@ -16,6 +43,8 @@ class ProductFormView extends ProductFormConsumerWidget {
         child: CircularProgressIndicator(),
       ));
     }
+
+    print(state.item);
     //menyimpan nilai dari form ke state
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +60,7 @@ class ProductFormView extends ProductFormConsumerWidget {
             QImagePicker(
               label: "Photo",
               validator: Validator.required,
-              value: null,
+              value: state.item?.photo,
               onChanged: (value) {
                 state.photo = value; //mendapatkan data (nilai) photo
               },
@@ -40,7 +69,8 @@ class ProductFormView extends ProductFormConsumerWidget {
             QTextField(
               label: "Product Name",
               validator: Validator.required,
-              value: "",
+              //kalau itemnya tidak sama dengan null, maka akan bawa data produknya
+              value: state.item?.productName, //dalam mode create, harusnya mull
               onChanged: (value) {
                 state.productName = value;
               },
@@ -48,7 +78,7 @@ class ProductFormView extends ProductFormConsumerWidget {
             QTextField(
               label: "Price",
               validator: Validator.required,
-              value: "",
+              value: state.item?.price?.toString(),
               onChanged: (value) {
                 //di parse ke double nilai value nya
                 state.price = double.tryParse(value) ?? 0;
@@ -58,7 +88,7 @@ class ProductFormView extends ProductFormConsumerWidget {
             QMemoField(
               label: "Description",
               validator: Validator.required,
-              value: "",
+              value: state.item?.description,
               onChanged: (value) {
                 state.description = value;
               },

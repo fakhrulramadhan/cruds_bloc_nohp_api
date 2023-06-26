@@ -73,7 +73,7 @@ class ProductService {
   //fungsi delete berdasarkan id
   Future delete(int id) async {
     //ketik dio_post
-    var response = await Dio().post(
+    var response = await Dio().delete(
       "https://capekngoding.com/bloc/api/products/$id",
       options: Options(
         headers: {

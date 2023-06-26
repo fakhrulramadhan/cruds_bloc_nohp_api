@@ -1,4 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hyper_ui/core.dart';
 part 'product_form_state.freezed.dart';
 
 //ctrl+shift+s ke state, ctrl+shift+v ke view
@@ -15,6 +15,7 @@ class ProductFormState with _$ProductFormState {
     @Default('') String description,
     //kalau mau pakai set state loading, event loadingnya dihapus
     @Default(false) bool loading,
+    Product? item, //utk update data, ambil item idnya
   }) = _ProductFormState;
 }
 
