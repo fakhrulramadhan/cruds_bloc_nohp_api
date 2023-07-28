@@ -1,9 +1,10 @@
 {
     "modules": [
-        "product_list",
-        "product_form"
+        "user_list",
+        "user_form"
     ],
     "module_directory_name": "presentation",
     "experimental_mode": false,
-    "unfreezed": true
+    "unfreezed": true,
+    "use_cubit": false
 }

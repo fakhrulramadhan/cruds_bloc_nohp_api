@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProductListState {
   int get counter => throw _privateConstructorUsedError;
   set counter(int value) => throw _privateConstructorUsedError;
-  List<Product> get products => throw _privateConstructorUsedError;
-  set products(List<Product> value) => throw _privateConstructorUsedError;
+  List<Product> get items => throw _privateConstructorUsedError;
+  set items(List<Product> value) => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
   set loading(bool value) => throw _privateConstructorUsedError;
 
@@ -34,7 +34,7 @@ abstract class $ProductListStateCopyWith<$Res> {
           ProductListState value, $Res Function(ProductListState) then) =
       _$ProductListStateCopyWithImpl<$Res, ProductListState>;
   @useResult
-  $Res call({int counter, List<Product> products, bool loading});
+  $Res call({int counter, List<Product> items, bool loading});
 }
 
 /// @nodoc
@@ -51,7 +51,7 @@ class _$ProductListStateCopyWithImpl<$Res, $Val extends ProductListState>
   @override
   $Res call({
     Object? counter = null,
-    Object? products = null,
+    Object? items = null,
     Object? loading = null,
   }) {
     return _then(_value.copyWith(
@@ -59,9 +59,9 @@ class _$ProductListStateCopyWithImpl<$Res, $Val extends ProductListState>
           ? _value.counter
           : counter // ignore: cast_nullable_to_non_nullable
               as int,
-      products: null == products
-          ? _value.products
-          : products // ignore: cast_nullable_to_non_nullable
+      items: null == items
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
               as List<Product>,
       loading: null == loading
           ? _value.loading
@@ -79,7 +79,7 @@ abstract class _$$_ProductListStateCopyWith<$Res>
       __$$_ProductListStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int counter, List<Product> products, bool loading});
+  $Res call({int counter, List<Product> items, bool loading});
 }
 
 /// @nodoc
@@ -94,7 +94,7 @@ class __$$_ProductListStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? counter = null,
-    Object? products = null,
+    Object? items = null,
     Object? loading = null,
   }) {
     return _then(_$_ProductListState(
@@ -102,9 +102,9 @@ class __$$_ProductListStateCopyWithImpl<$Res>
           ? _value.counter
           : counter // ignore: cast_nullable_to_non_nullable
               as int,
-      products: null == products
-          ? _value.products
-          : products // ignore: cast_nullable_to_non_nullable
+      items: null == items
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
               as List<Product>,
       loading: null == loading
           ? _value.loading
@@ -118,21 +118,21 @@ class __$$_ProductListStateCopyWithImpl<$Res>
 
 class _$_ProductListState implements _ProductListState {
   _$_ProductListState(
-      {this.counter = 0, this.products = const [], this.loading = false});
+      {this.counter = 0, this.items = const [], this.loading = false});
 
   @override
   @JsonKey()
   int counter;
   @override
   @JsonKey()
-  List<Product> products;
+  List<Product> items;
   @override
   @JsonKey()
   bool loading;
 
   @override
   String toString() {
-    return 'ProductListState(counter: $counter, products: $products, loading: $loading)';
+    return 'ProductListState(counter: $counter, items: $items, loading: $loading)';
   }
 
   @JsonKey(ignore: true)
@@ -143,17 +143,15 @@ class _$_ProductListState implements _ProductListState {
 }
 
 abstract class _ProductListState implements ProductListState {
-  factory _ProductListState(
-      {int counter,
-      List<Product> products,
-      bool loading}) = _$_ProductListState;
+  factory _ProductListState({int counter, List<Product> items, bool loading}) =
+      _$_ProductListState;
 
   @override
   int get counter;
   set counter(int value);
   @override
-  List<Product> get products;
-  set products(List<Product> value);
+  List<Product> get items;
+  set items(List<Product> value);
   @override
   bool get loading;
   set loading(bool value);

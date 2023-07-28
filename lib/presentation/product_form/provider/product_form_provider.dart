@@ -4,12 +4,12 @@ import '../bloc/product_form_bloc.dart';
 import '../state/product_form_state.dart';
 
 class ProductFormProvider extends StatelessWidget {
-  final Widget Function(BuildContext, ProductFormBloc, ProductFormState)
-      builder;
   final Function(
     ProductFormBloc bloc,
     ProductFormState state,
   )? beforeInitState;
+  final Widget Function(BuildContext, ProductFormBloc, ProductFormState)
+      builder;
   const ProductFormProvider({
     Key? key,
     required this.builder,
@@ -52,7 +52,7 @@ abstract class ProductFormConsumerWidgetInterface {
 
 class ProductFormConsumerWidget extends StatelessWidget
     implements ProductFormConsumerWidgetInterface {
-  const ProductFormConsumerWidget({super.key});
+  ProductFormConsumerWidget({super.key});
 
   @override
   Widget buildView(
@@ -63,6 +63,7 @@ class ProductFormConsumerWidget extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return ProductFormProvider(
+      beforeInitState: beforeInitState,
       builder: (context, bloc, state) {
         return buildView(context, bloc, state);
       },

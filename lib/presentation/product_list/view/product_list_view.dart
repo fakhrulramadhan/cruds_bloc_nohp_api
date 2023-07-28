@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hyper_ui/core.dart';
+import 'package:cruds_bloc_nohp_api/core.dart';
 
 class ProductListView extends ProductListConsumerWidget {
   const ProductListView({super.key});
@@ -29,17 +29,17 @@ class ProductListView extends ProductListConsumerWidget {
               child: ListView.builder(
                 //ambil jumlah data produk dari API
                 //kalau di product list view namanya product
-                itemCount: state.products.length,
+                itemCount: state.items.length,
                 shrinkWrap: true,
                 padding: EdgeInsets.zero,
                 clipBehavior: Clip.none,
                 itemBuilder: (context, index) {
                   //ambil list product ke item dengan state.nama_field[index]
-                  var item = state.products[index];
+                  var item = state.items[index];
                   //print(item);
                   //delete gunakan dismissible (alt+shift+d)
                   return Dismissible(
-                    key: UniqueKey(),
+                    key: UniqueKey(), //unik key utk id nya
                     onDismissed: (detail) {},
                     confirmDismiss: (direction) async {
                       bool confirm = false;
@@ -102,6 +102,8 @@ class ProductListView extends ProductListConsumerWidget {
                           await Get.to(ProductFormView(
                             item: item,
                           ));
+
+                          bloc.add(ProductListLoadEvent());
                         },
                         leading: CircleAvatar(
                           backgroundColor: Colors.grey[200],

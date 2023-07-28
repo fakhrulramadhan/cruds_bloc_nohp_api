@@ -1,4 +1,4 @@
-import 'package:hyper_ui/core.dart';
+import 'package:cruds_bloc_nohp_api/core.dart';
 import 'package:flutter/material.dart';
 
 //kalau mau pakai breakpoint, harus pakai mode debug
@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
       navigatorKey: Get.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: getDefaultTheme(),
-      home: ProductListView(), //
+      home: UserListView(), //
       builder: (context, child) => debugView(
         context: context,
         child: child,

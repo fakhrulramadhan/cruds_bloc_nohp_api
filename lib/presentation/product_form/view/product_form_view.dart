@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hyper_ui/core.dart';
+import 'package:cruds_bloc_nohp_api/core.dart';
 
 class ProductFormView extends ProductFormConsumerWidget {
   //argument utk update data
-  //kalau di product list view, nama itemnya itu products
+  //kalau di product list view, nama itemnya itu items
   final Product? item; //item berisi data products
 
   ProductFormView({super.key, this.item});
@@ -11,28 +11,11 @@ class ProductFormView extends ProductFormConsumerWidget {
   //fungsi utk menerima arguments
   @override
   beforeInitState(bloc, state) {
-    state.item == item;
+    state.item = item;
     //print(state.item);
+    print("=====");
     print(state.item);
   }
-
-  @override
-  void initState(bloc, state) {
-    //super.initState();
-    //state.item == item;
-    //print(state.item);
-    //print(item);
-  }
-
-  // @override
-  // beforeInitState(ProductFormBloc bloc, ProductFormState state) {
-  //   // TODO: implement beforeInitState
-
-  //   state.item = item;
-  //   print("====");
-  //   print(item);
-  //   return super.beforeInitState(bloc, state);
-  // }
 
   @override
   Widget buildView(context, bloc, state) {
@@ -92,6 +75,13 @@ class ProductFormView extends ProductFormConsumerWidget {
               onChanged: (value) {
                 state.description = value;
               },
+            ),
+            QDatePicker(
+            label: "Birth date",
+            validator: Validator.required,
+            onChanged: (value) {
+            print("value: $value");
+            },
             ),
           ],
         ),

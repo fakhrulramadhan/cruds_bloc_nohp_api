@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hyper_ui/core.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData getDarkTheme() {
   return ThemeData.dark().copyWith(

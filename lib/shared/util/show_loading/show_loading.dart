@@ -1,4 +1,4 @@
-import 'package:hyper_ui/core.dart';
+import 'package:cruds_bloc_nohp_api/core.dart';
 import 'package:flutter/material.dart';
 
 showLoading({

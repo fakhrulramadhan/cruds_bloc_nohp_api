@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hyper_ui/core.dart';
+import 'package:cruds_bloc_nohp_api/core.dart';
 
+//utk inisiasi awalan memanggil fungsi ketika halaman apps dibuka
 mixin _BlocLifecycle {
+  void beforeInitState() {}
   void initState() {}
   void dispose() {}
 }
@@ -20,22 +22,19 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState>
       emit(state.copyWith());
     });
 
-    //ketika selesai loading
-    on<ProductFormLoadingCompleteEvent>((event, emit) {
-      state.loading = false;
-      emit(state.copyWith());
-    });
-
     //fungsi ketika (event) tombol save diklik
     on<ProductFormButtonSaveEvent>((event, emit) async {
-      //langsung copy with statenya aja
-      //emit utk merubah aksi pada UI sekaligus mengirim data state
-      //terus ke view button save
-
-      //update dulu statenya
-      //state.loading = true;
-
       //(isCreateMode)
+
+      // await ProductService().add(Product(
+      //   photo: state.photo, //fotonya ambil dari state.photo
+      //   productName: state.productName,
+      //   price: state.price, //price sama state.price harus sama sama double
+      //   description: state.description,
+      // ));
+      add(ProductFormLoadingEvent());
+
+      await Future.delayed(const Duration(seconds: 2));
 
       ///kalau editmode dan bukan lagi editmode
       if (isEditMode) {
@@ -46,7 +45,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState>
                 description: state.description,
                 price: state.price,
                 productName: state.productName));
-      } else if (isCreateMode) {
+      } else {
         await ProductService().add(Product(
           photo: state.photo, //fotonya ambil dari state.photo
           productName: state.productName,
@@ -57,7 +56,6 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState>
 
       //di bloc panggil event pakai add(nama_event)
       //mulai loading event
-      add(ProductFormLoadingEvent()); //panggil loading Event
 
       //proses post (tambah) data
       //add nya diisi oleh nama model, masukkin selain field id
@@ -69,13 +67,13 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState>
       // ));
 
       //tunggu dulu 2 detik]
-      await Future.delayed(Duration(seconds: 2));
+      //await Future.delayed(Duration(seconds: 2));
 
       //kalau sudah beres, loadingnya dimatikan
       //state.loading = false;
 
       //utk update state kosong pakai emit state copywith
-      emit(state.copyWith());
+      emit(state.copyWith()); //utk update UI
 
       //panggil event selesai loading
       add(ProductFormLoadingCompleteEvent()); //selesai loading
@@ -86,15 +84,33 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState>
       //navigasu ke halaman dashboard (halaman sebelumnya)
       Get.back();
     });
+
+    //ketika selesai loading
+    on<ProductFormLoadingCompleteEvent>((event, emit) {
+      state.loading = false;
+      emit(state.copyWith());
+    });
   }
 
   @override
   void initState() {
     //initState event
-    super.initState();
     final Product? item; //item berisi data products
     //print(isEditMode);
     //print(state.item);
+
+    //utk menangkap nilai (data) ketika dalam mode edit
+    //yang diterima dari listview (datanya wajib ada !)
+    //state.nama_field = ambil data editnya dari item (model product)
+    if (isEditMode) {
+      state.photo = state.item!.photo!;
+      state.productName = state.item!.productName!;
+      state.description = state.item!.description!;
+      state.price = state.item!.price!;
+    }
+    print(isEditMode);
+
+    super.initState();
   }
 
   @override

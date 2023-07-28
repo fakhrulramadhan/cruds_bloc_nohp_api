@@ -1,4 +1,4 @@
-package com.example.hyper_ui
+package com.example.cruds_bloc_nohp_api
 
 import io.flutter.embedding.android.FlutterActivity
 

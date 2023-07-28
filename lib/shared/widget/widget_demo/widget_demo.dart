@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hyper_ui/core.dart';
+import 'package:cruds_bloc_nohp_api/core.dart';
 
 class HUIWidgetDemoView extends StatefulWidget {
   HUIWidgetDemoView({Key? key}) : super(key: key);
@@ -107,29 +107,29 @@ class _HUIWidgetDemoViewState extends State<HUIWidgetDemoView> {
                   longitude: 106.80254435779423,
                   onChanged: (latitude, longitude) {},
                 ),
-                QAutoComplete(
-                  label: "Favorite employee",
-                  hint: "Your favorite Employee",
-                  validator: Validator.required,
-                  items: [
-                    {
-                      "label": "Jackie Roo",
-                      "value": "101",
-                      "info": "Hacker",
-                    },
-                    {
-                      "label": "Dan Milton",
-                      "value": "102",
-                      "info": "UI/UX Designer",
-                    },
-                    {
-                      "label": "Ryper Roo",
-                      "value": "103",
-                      "info": "Android Developer",
-                    }
-                  ],
-                  onChanged: (value, label) {},
-                ),
+                // QAutoComplete(
+                //   label: "Favorite employee",
+                //   hint: "Your favorite Employee",
+                //   validator: Validator.required,
+                //   items: [
+                //     {
+                //       "label": "Jackie Roo",
+                //       "value": "101",
+                //       "info": "Hacker",
+                //     },
+                //     {
+                //       "label": "Dan Milton",
+                //       "value": "102",
+                //       "info": "UI/UX Designer",
+                //     },
+                //     {
+                //       "label": "Ryper Roo",
+                //       "value": "103",
+                //       "info": "Android Developer",
+                //     }
+                //   ],
+                //   onChanged: (value, label) {},
+                // ),
                 QTextField(
                   label: "Name",
                   hint: "Name",

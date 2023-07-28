@@ -1,19 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hyper_ui/presentation/product_form/service/product_service.dart';
+import 'package:cruds_bloc_nohp_api/presentation/product_form/service/product_service.dart';
 import '../event/product_list_event.dart';
 import '../state/product_list_state.dart';
 
 mixin _BlocLifecycle {
   void initState() {}
   void dispose() {}
-}
-
-@override
-void initState() {
-  //initState event
-  //super.initState();
-  //print(isEditMode);
-  //print(state.item);
 }
 
 class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
@@ -40,7 +32,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
       //state.products = await ProductService().getProdcuts();
 
       var productItems = await ProductService().getProdcuts();
-      state.products = productItems; //lempar data dari variabel ke state
+      state.items = productItems; //lempar data dari variabel ke state
       // digunakan untuk memancarkan (emit) update UI pada objek state yang baru
       //update statenya (sudah di emit di productcomplete)
       emit(state.copyWith());

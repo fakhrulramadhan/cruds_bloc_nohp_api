@@ -1,4 +1,4 @@
-import 'package:hyper_ui/core.dart';
+import 'package:cruds_bloc_nohp_api/core.dart';
 part 'product_form_state.freezed.dart';
 
 //ctrl+shift+s ke state, ctrl+shift+v ke view
