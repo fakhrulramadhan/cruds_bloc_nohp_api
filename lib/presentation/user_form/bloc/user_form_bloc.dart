@@ -8,7 +8,8 @@ mixin _BlocLifecycle {
 
 class UserFormBloc extends Bloc<UserFormEvent, UserFormState>
     with _BlocLifecycle {
-  UserFormBloc() : super(UserFormState()) {
+  final User? user;
+  UserFormBloc(this.user) : super(UserFormState()) {
     on<UserFormIncrementEvent>((event, emit) {
       state.counter++;
       emit(state.copyWith());
@@ -32,12 +33,19 @@ class UserFormBloc extends Bloc<UserFormEvent, UserFormState>
     on<UserFormButtonSaveEvent>((event, emit) async {
       add(UserFormLoadingEvent());
 
+      User? user;
+
+      //print(user);
+      print("========");
+
       await Future.delayed(Duration(seconds: 2));
+
+      print(state.user?.id);
 
       if (isEditMode) {
         await UserServices().update(
             id: state.user!.id!,
-            item: User(
+            user: User(
                 userName: state.userName,
                 address: state.address,
                 dateOfBirth: state.dateOfBirth));
@@ -55,6 +63,45 @@ class UserFormBloc extends Bloc<UserFormEvent, UserFormState>
 
       Get.back();
     });
+
+    on<UserFormButtonUpdateEvent>((event, emit) async {
+      add(UserFormLoadingEvent());
+
+      User? user;
+
+      //print(user);
+      print("========");
+
+      await Future.delayed(Duration(seconds: 2));
+
+      print(state.user?.id);
+
+      await UserServices().update(
+          id: state.user!.id!,
+          user: User(
+              userName: state.userName,
+              address: state.address,
+              dateOfBirth: state.dateOfBirth));
+
+      //update UI
+      emit(state.copyWith());
+
+      add(UserFormLoadingCompleteEvent());
+
+      //Get.back();
+    });
+
+    on<UserFormLoadDataEvent>((event, emit) {
+      print(state.user);
+      User? user;
+      state.user = user;
+
+      print(user);
+      state.isLoading = true;
+
+      //update UI seperti setstate() atau update()
+      emit(state.copyWith());
+    });
   }
 
   @override
@@ -62,15 +109,27 @@ class UserFormBloc extends Bloc<UserFormEvent, UserFormState>
     //initState event
     super.initState();
 
-    final User? user;
+    add(UserFormLoadDataEvent());
 
-    if (isEditMode) {
-      state.userName = state.user!.userName!;
-      state.address = state.user!.address!;
-      state.dateOfBirth = state.user!.dateOfBirth!;
-    }
+    User? user;
 
-    print(isEditMode);
+    state.user = user;
+
+    // final User? user;
+
+    // if (isEditMode) {
+    //   state.userName = state.user!.userName!;
+    //   state.address = state.user!.address!;
+    //   state.dateOfBirth = state.user!.dateOfBirth!;
+
+    //   state.userName = state.user!.userName!;
+    //   state.address = state.user!.address!;
+    //   state.dateOfBirth = state.user!.dateOfBirth!;
+    // }
+
+    // print(isEditMode);
+    // print("=======");
+    // print(isCreateMode);
   }
 
   @override

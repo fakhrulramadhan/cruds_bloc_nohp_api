@@ -1,4 +1,5 @@
 import 'package:cruds_bloc_nohp_api/core.dart';
+import 'package:cruds_bloc_nohp_api/presentation/users_list/view/users_list_view.dart';
 import 'package:flutter/material.dart';
 
 //kalau mau pakai breakpoint, harus pakai mode debug
@@ -21,7 +22,7 @@ class MainApp extends StatelessWidget {
       navigatorKey: Get.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: getDefaultTheme(),
-      home: UserListView(), //
+      home: UsersListView(), //
       builder: (context, child) => debugView(
         context: context,
         child: child,

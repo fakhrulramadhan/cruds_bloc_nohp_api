@@ -1,0 +1,144 @@
+import 'package:cruds_bloc_nohp_api/core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class UserFormView extends StatefulWidget {
+  final User? user;
+
+  const UserFormView({super.key, this.user});
+
+  @override
+  State<UserFormView> createState() => _UserFormViewState(this.user);
+}
+
+class _UserFormViewState extends State<UserFormView> {
+  final User? user;
+  _UserFormViewState(this.user);
+  UserFormBloc bloc = UserFormBloc();
+
+  bool get isEditMode {
+    return user != null;
+  }
+
+  bool get isCreateMode {
+    return user == null;
+  }
+
+  @override
+  void initState() {
+    //bloc.initState();
+
+    //final User? user;
+
+    String? username;
+    String? address;
+    String? dateOfBirth;
+
+    if (isEditMode) {
+      username = user?.userName;
+      address = user?.address;
+      dateOfBirth = user?.dateOfBirth;
+    }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    bloc.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (BuildContext context) => bloc,
+      child: BlocListener<UserFormBloc, UserFormState>(
+        listener: (context, state) {},
+        child: BlocBuilder<UserFormBloc, UserFormState>(
+          builder: (context, state) {
+            final bloc = context.read<UserFormBloc>();
+            return buildView(context, bloc, state);
+          },
+        ),
+      ),
+    );
+  }
+
+  buildView(
+    BuildContext context,
+    UserFormBloc bloc,
+    UserFormState state,
+  ) {
+    if (state.isLoading) {
+      //jika is loading nya on
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('User Form'),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          QTextField(
+            label: "Username",
+            validator: Validator.required,
+            value: user?.userName, //? belum tentu ada, ambil pas editmode
+            onChanged: (value) {
+              state.userName = value;
+            },
+          ),
+          QMemoField(
+            label: "Address",
+            validator: Validator.required,
+            value: user?.address,
+            onChanged: (value) {
+              state.address = value;
+            },
+          ),
+          QDatePicker(
+            label: "Birth date",
+            validator: Validator.required,
+            //value: state.user?.dateOfBirth,
+            onChanged: (value) {
+              state.dateOfBirth = DateFormat("dd-m-y").format(value);
+              print("value: $value");
+              print("${state.dateOfBirth}");
+            },
+          ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        height: 72,
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.all(12.0),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blueGrey,
+          ),
+          onPressed: () {
+            if (user != null) {}
+            bloc.add(UserFormButtonSaveEvent());
+          },
+          child: Row(
+            children: [
+              const Icon(
+                Icons.save,
+                size: 24.0,
+              ),
+              const SizedBox(
+                width: 8.0,
+              ),
+              const Text("Simpan"),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

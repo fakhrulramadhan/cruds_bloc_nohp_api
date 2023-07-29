@@ -1,5 +1,5 @@
+import 'package:cruds_bloc_nohp_api/model/user/user.dart';
 import 'package:dio/dio.dart';
-import '../model/user/user.dart';
 
 class UserServices {
   //,mendapatkan semua data produk
@@ -40,15 +40,15 @@ class UserServices {
     }
   }
 
-  Future update({required int id, required User user}) async {
+  Future update({required int id, required User item}) async {
     try {
       var response = await Dio().post(
           "https://capekngoding.com/6289607405728/api/users/$id",
           options: Options(headers: {"Content-Type": "application/json"}),
           data: {
-            "user_name": user.userName,
-            "address": user.address,
-            "date_of_birth": user.dateOfBirth,
+            "user_name": item.userName,
+            "address": item.address,
+            "date_of_birth": item.dateOfBirth,
           });
 
       //Map obj = response.data;
